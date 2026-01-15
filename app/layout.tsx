@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Pixelify_Sans, Inter, Jersey_10 } from "next/font/google";
 import "./globals.css";
+import Provide from "./provider";
+import Provider from "./provider";
 
 const gameFonts = Jersey_10({
   subsets: ["latin"],
@@ -33,10 +35,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning className="dark">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${gameFonts.variable} ${inter.variable} antialiased`}
       >
+        <Provider
+         attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange>
+        </Provider>
         {children}
       </body>
     </html>
