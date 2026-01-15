@@ -1,7 +1,17 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Pixelify_Sans, Inter, Jersey_10 } from "next/font/google";
 import "./globals.css";
 
+const gameFonts = Jersey_10({
+  subsets: ["latin"],
+  variable: '--font-game',
+  weight: ['400']
+})
+
+const inter = Inter({
+  subsets : ["latin"],
+  variable: "--font-inter",
+}) 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -25,7 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${gameFonts.variable} ${inter.variable} antialiased`}
       >
         {children}
       </body>
