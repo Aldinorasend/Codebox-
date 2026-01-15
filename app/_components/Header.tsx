@@ -1,3 +1,6 @@
+"use client";
+
+
 import React from 'react'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
@@ -12,6 +15,7 @@ import {
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"
 import Link from 'next/link'
+import { UserButton, useUser } from '@clerk/nextjs'
 
 const courses = [
   {
@@ -64,6 +68,7 @@ const courses = [
   },
 ]
 function Header() {
+    const {user} = useUser();
   return (
     <div className='p-4 max-w-7xl flex mx-auto items-center w-full'>
         <div className='flex-1 flex gap-2 items-center'>
@@ -109,7 +114,16 @@ function Header() {
 
         {/* Signup Button */}
         <div className='flex-1 flex justify-end'>
-            <Button className='font-game text-2xl' variant={'pixel'}>Signup</Button>
+            {!user? 
+            <Link href={'/sign-in'}>
+                <Button className='font-game text-2xl' variant={'pixel'}>Signup</Button>
+            </Link>
+            :
+            <div className='flex items-center gap-4'>
+                <Button className='font-game text-2xl' variant={'pixel'}>Dashboard</Button>
+                <UserButton />
+            </div>
+            }
         </div>
     </div>
   )
